@@ -60,6 +60,11 @@ Radial menu for ESX &amp; QBCore Framework
    exports.rhd_radialmenu:removeRadialItem("rhd_test:radial")
 ```
 
+* Disable Radial
+```lua
+   exports.rhd_radialmenu:disableRadial(true --[[@as boolean]])
+```
+
 # Dependencies 
 - [ox_lib](https://github.com/overextended/ox_lib/releases)
 
