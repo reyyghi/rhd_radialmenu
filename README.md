@@ -11,17 +11,17 @@ Radial menu for ESX &amp; QBCore Framework
 # Radial Items
 | Items      | Type | Description    |
 |-----------|------|---------|
-|   event   | client event| To trigger client events|
-| export | exports      | To use exports from other scripts|     
-| action | function      | To use the function|      
-| command | command      | For trigger commands available on the server|                                  |
-| KeepOpen  |   boolean   | Change it to true if you want the radial to remain open when selecting items|
-| canEnable |   function      | Checking conditions for opening radials                                     |
-| serverEvent | server event      | To trigger server events                                     |
+|    event   | client event| To trigger client events|
+|    export | exports      | To use exports from other scripts|     
+|    action | function      | To use the function|      
+|    command | command      | For trigger commands available on the server|                                  |
+|    KeepOpen  |   boolean   | Change it to true if you want the radial to remain open when selecting items|
+|    canEnable |   function      | Checking conditions for opening radials                                     |
+|    serverEvent | server event      | To trigger server events                                     |
 
 
 # Example
-## Add Radial
+* Add Radial
 
 ```lua
     local RadialItems = {
@@ -55,9 +55,9 @@ Radial menu for ESX &amp; QBCore Framework
     exports.rhd_radialmenu:addRadialItem(RadialItems)
 ```
 
-## Remove Radial
+* Remove Radial
 ```lua
-   exports.rhd_radialmenu:removeRadialItem("test_radial")
+   exports.rhd_radialmenu:removeRadialItem("rhd_test:radial")
 ```
 
 # Dependencies 
