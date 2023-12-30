@@ -1,6 +1,7 @@
 
 # RHD Radial Menu
-Radial menu for ESX &amp; QBCore Framework
+| STANDALONE RADIAL MENU|
+|-|
 
 # Feature
 - Easy Configuration
@@ -27,10 +28,10 @@ Radial menu for ESX &amp; QBCore Framework
     local RadialItems = {
         id = "rhd_test:radial",
         label = "JNCK TEAM",
-        icon = "#user",
+        icon = "user",
         KeepOpen = true,
         canEnable = function()
-            return not IsEntityDead(cache.ped) --- can only be opened when the player is alive
+            return not IsEntityDead(PlayerPedId()) --- can only be opened when the player is alive
         end,
     }
 
@@ -64,9 +65,6 @@ Radial menu for ESX &amp; QBCore Framework
 ```lua
    exports.rhd_radialmenu:disableRadial(true --[[@as boolean]])
 ```
-
-# Dependencies 
-- [ox_lib](https://github.com/overextended/ox_lib/releases)
 
 # Need Support?
 - [Discord](https://discord.gg/K4BhPY3ySB)
