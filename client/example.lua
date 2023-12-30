@@ -1,0 +1,83 @@
+-- local RadialItems = {
+--     id = "rhd_test:radial_1",
+--     label = "JNCK TEAM",
+--     icon = "user",
+--     KeepOpen = true,
+--     canEnable = function()
+--         return not IsEntityDead(PlayerPedId()) --- can only be opened when the player is alive
+--     end,
+--     options = {
+--         {
+--             id = "rhd_test:radial_action_1",
+--             icon = "user-group",
+--             label = "TEST ACTION",
+--             action = function ()
+--                 print("AWDWAD")
+--             end,
+--             canEnable = function ()
+--                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
+--             end
+--         },
+--         {
+--             id = "rhd_test:radial_options_1",
+--             icon = "user-group",
+--             label = "Test 1",
+--             canEnable = function ()
+--                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
+--             end,
+--             options = {
+--                 {
+--                     id = "rhd_test:radial_options_2",
+--                     icon = "user-group",
+--                     label = "Test 2",
+--                     options = {
+--                         {
+--                             id = "rhd_test:radial_options_3",
+--                             icon = "user-group",
+--                             label = "Test 3",
+--                             options = {
+--                                 {
+--                                     id = "rhd_test:radial_options_4",
+--                                     icon = "user-group",
+--                                     label = "Test 4",
+--                                     options = {
+--                                         {
+--                                             id = "rhd_test:radial_options_5",
+--                                             icon = "user-group",
+--                                             label = "Test 5",
+--                                             options = {
+--                                                 {
+--                                                     id = "rhd_test:radial_options_6",
+--                                                     icon = "user-group",
+--                                                     label = "Test 6",
+--                                                     options = {
+--                                                         {
+--                                                             id = "rhd_test:radial_options_7",
+--                                                             icon = "user-group",
+--                                                             label = "Test 7",
+--                                                             action = function ()
+--                                                                 print("AWDWA")
+--                                                             end
+--                                                         },
+--                                                     }
+--                                                 },
+--                                             }
+--                                         },
+--                                     }
+--                                 },
+--                             }
+--                         },
+--                     }
+--                 },
+--             }
+--         }
+--     }
+-- }
+
+-- RegisterCommand("addradial", function ()
+--     exports.rhd_radialmenu:addRadialItem(RadialItems)
+-- end, false)
+
+-- RegisterCommand("deleteradial", function ()
+--     exports.rhd_radialmenu:removeRadialItem("rhd_test:radial_1")
+-- end, false)
