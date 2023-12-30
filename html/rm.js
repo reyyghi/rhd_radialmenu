@@ -16,40 +16,15 @@ $(document).ready(function () {
                 menuItems: eventData.data,
                 onClick: function (item) {
                     if(item.id !== 'undefined' && item.type !== 'undefined') {
-                        let Action = null
-                        let DataType = null
-                        let Export = ""
-
-                        if (item.isOptions) {
-                            DataType = "Config.ItemRadial[" + item.number + "].options[" + item.menuId + "]"
-                        } else if (item.isSubmenu) {
-                            DataType = "Config.ItemRadial[" + item.number + "].options[" + item.menuId + "].options[" + item.subMenuId + "]"
-                        } else {
-                            DataType = "Config.ItemRadial[" + item.number + "]"
-                        }
-
-                        if (item.KeepOpen) {
+                        
+                        if (item.KeepOpen && item.KeepOpen === true) {
                             this.closeOnClick = false
                         } else {
                             this.closeOnClick = true
                         }
 
-                        if (item.type === "clientEvent") {
-                            Action = "TriggerEvent("+DataType+".event, "+DataType+".params)"
-                        } else if (item.type === "serverEvent") {
-                            Action = "TriggerServerEvent("+DataType+".serverEvent, "+DataType+".params)"
-                        } else if (item.type === "command") {
-                            Action = "ExecuteCommand("+DataType+".command)"
-                        } else if (item.type === "exports") {
-                            Export = DataType+".exports"
-                        } else if (item.type == "function") {
-                            Action = ""+DataType+".action()"
-                        }
-                        
                         $.post('http://rhd_radialmenu/recieveData', JSON.stringify({
-                            type: item.type,
-                            action: Action,
-                            export: Export,
+                            id: item.id,
                             close: item.KeepOpen
                         }))
                     }
@@ -157,7 +132,7 @@ RadialMenu.prototype.showNestedMenu = function (item) {
     var self = this;
     self.parentMenu.push(self.currentMenu);
     self.parentItems.push(self.levelItems);
-    self.currentMenu = self.createMenu('menu inner', item.items, true);
+    self.currentMenu = self.createMenu('menu inner', item.options, true);
     self.holder.appendChild(self.currentMenu);
 
     // wait DOM commands to apply and then set class to allow transition to take effect
@@ -183,7 +158,7 @@ RadialMenu.prototype.handleClick = function () {
     var selectedIndex = self.getSelectedIndex();
     if (selectedIndex >= 0) {
         var item = self.levelItems[selectedIndex];
-        if (item.items) {
+        if (item.options && item.options.length > 0) {
             self.showNestedMenu(item);
         } else {
             if (self.onClick) {
@@ -439,11 +414,11 @@ RadialMenu.prototype.appendSectorPath = function (startAngleDeg, endAngleDeg, sv
         g.setAttribute('data-id', item.id);
         g.setAttribute('data-index', index);
 
-        if (item.title) {
-            var text = self.createText(centerPoint.x, centerPoint.y, item.title);
+        if (item.label) {
+            var text = self.createText(centerPoint.x, centerPoint.y, item.label);
             text.setAttribute('transform', 'translate(0, 1.5)');
     
-            let multiTitle = item.title.split(" ")
+            let multiTitle = item.label.split(" ")
             for(let title in multiTitle){
                 var tspanElement = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
                 tspanElement.innerHTML = multiTitle[title];
@@ -456,8 +431,9 @@ RadialMenu.prototype.appendSectorPath = function (startAngleDeg, endAngleDeg, sv
         }
 
         if (item.icon) {
-            var use = self.createUseTag(centerPoint.x, centerPoint.y, item.icon);
-            if (item.title) {
+            var Icons = item.icon.startsWith('#') ? item.icon : '#' + item.icon;
+            var use = self.createUseTag(centerPoint.x, centerPoint.y, Icons);
+            if (item.label) {
                 use.setAttribute('transform', 'translate(-5,-8)');
             } else {
                 use.setAttribute('transform', 'translate(-5,-5)');
