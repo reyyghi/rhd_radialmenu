@@ -1,4 +1,3 @@
 Config = {}
-Config.OpenRadialKey = "F1"
-
+Config.OpenRadial = "F1"
 Config.ItemRadial = {}
