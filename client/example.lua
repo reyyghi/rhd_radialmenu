@@ -14,6 +14,7 @@
 --             action = function ()
 --                 print("AWDWAD 1")
 --             end,
+--             KeepOpen = true,
 --             canEnable = function ()
 --                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
 --             end
