@@ -30,7 +30,6 @@ local function removeRadialItem ( radialId )
     end
 end
 
-
 local function radialAction ()
     local enableMenu = {} RHDITEMS = {}
     local Data = Config.ItemRadial
@@ -50,35 +49,54 @@ local function radialAction ()
     end
 end
 
---[[ Global Function ]]
 function ReadTable(data)
     local Result = {}
-    for _, item in ipairs(data) do
+    local PM = Result
+
+    for index, item in ipairs(data) do
         local canAdd = true
+
         if item.canEnable then
             canAdd = item.canEnable()
         end
+
         if canAdd then
             local newItem = {
                 id = item.id,
                 label = item.label,
                 icon = item.icon,
-                KeepOpen = item.KeepOpen
+                KeepOpen = item.KeepOpen,
+                action = item.action,
+                event = item.event,
+                serverEvent = item.serverEvent,
+                command = item.command,
+                export = item.export,
             }
+
             if item.options then
                 newItem.options = ReadTable(item.options)
             else
-                RHDITEMS[item.id] = {
-                    action = item.action,
-                    event = item.event,
-                    serverEvent = item.serverEvent,
-                    command = item.command,
-                    export = item.export,
-                }
+                RHDITEMS[item.id] = newItem
             end
-            Result[#Result+1] = newItem
+
+            PM[#PM + 1] = newItem
+
+            if Config.MaxItems.enable then
+                if index % Config.MaxItems.max == 0 and index < #data then
+                    local moreItem = {
+                        id = "_more",
+                        label = "More",
+                        icon = "ellipsis-h",
+                        options = {}
+                    }
+    
+                    PM[Config.MaxItems.max + 1] = moreItem
+                    PM = moreItem.options
+                end
+            end
         end
     end
+
     return Result
 end
 
