@@ -39,6 +39,7 @@ local function radialAction ()
             SendNUIMessage({
                 state = "show",
                 data = enableMenu,
+                holdkey = Config.OpenRadial.hold or false
             })
             SetCursorLocation(0.5, 0.5)
             SetNuiFocus(true, true)
@@ -148,7 +149,7 @@ RegisterCommand("closeradial", function ()
     })
 end, false)
 
-RegisterKeyMapping("oprenradial", "Radial Menu", "keyboard", Config.OpenRadial)
+RegisterKeyMapping("oprenradial", "Radial Menu", "keyboard", Config.OpenRadial.key)
 
 --[[ Event Handler ]]
 AddEventHandler('onClientResourceStop', function(resource)
