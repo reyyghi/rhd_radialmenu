@@ -1,9 +1,11 @@
 $(document).ready(function () {
     let menuKeybind = "~"
     let resourceName = ""
+    let HoldKey = false;
     let menu = null;
     window.addEventListener('message', function (event) {
         let eventData = event.data;
+        HoldKey = eventData.holdkey;
         menuKeybind = eventData.menuKeyBind;
         resourceName = eventData.resourceName;
         if (eventData.state === "show") {
@@ -36,8 +38,14 @@ $(document).ready(function () {
             menu.destroy();
         }
     });
-    window.addEventListener("keyup", function onEvent(event) {
-        $.post(`https://rhd_radialmenu/closemenu`, JSON.stringify({}));
+    window.addEventListener("keyup", event => {
+        if (HoldKey && HoldKey === true) {
+            $.post(`https://rhd_radialmenu/closemenu`, JSON.stringify({}));
+        } else {
+            if (event.isComposing || event.keyCode === 71) {
+                $.post(`https://rhd_radialmenu/closemenu`, JSON.stringify({}));
+            }
+        }
     });
 });
 
