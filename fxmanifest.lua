@@ -1,4 +1,4 @@
-fx_version 'adamant'
+fx_version 'cerulean'
 games { 'gta5' }
 
 author "Reyghita Hafizh Firmanda"
@@ -12,8 +12,8 @@ client_scripts {
 
 files {
 	"html/ui.html",
-	"html/rm.css",
-	"html/rm.js",
+	"html/css/rm.css",
+	"html/js/rm.js",
 }
 
 lua54 "yes"
