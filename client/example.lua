@@ -12,7 +12,84 @@
 --             icon = "user-group",
 --             label = "TEST ACTION",
 --             action = function ()
---                 print("AWDWAD")
+--                 print("AWDWAD 1")
+--             end,
+--             canEnable = function ()
+--                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
+--             end
+--         },
+--         {
+--             id = "rhd_test:radial_action_2",
+--             icon = "user-group",
+--             label = "TEST ACTION 2",
+--             action = function ()
+--                 print("AWDWAD 2")
+--             end,
+--             canEnable = function ()
+--                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
+--             end
+--         },
+--         {
+--             id = "rhd_test:radial_action_3",
+--             icon = "user-group",
+--             label = "TEST ACTION 3",
+--             action = function ()
+--                 print("AWDWAD 3")
+--             end,
+--             canEnable = function ()
+--                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
+--             end
+--         },
+--         {
+--             id = "rhd_test:radial_action_4",
+--             icon = "user-group",
+--             label = "TEST ACTION 4",
+--             action = function ()
+--                 print("AWDWAD 4")
+--             end,
+--             canEnable = function ()
+--                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
+--             end
+--         },
+--         {
+--             id = "rhd_test:radial_action_5",
+--             icon = "user-group",
+--             label = "TEST ACTION 5",
+--             action = function ()
+--                 print("AWDWAD 5")
+--             end,
+--             canEnable = function ()
+--                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
+--             end
+--         },
+--         {
+--             id = "rhd_test:radial_action_6",
+--             icon = "user-group",
+--             label = "TEST ACTION 6",
+--             action = function ()
+--                 print("AWDWAD 6")
+--             end,
+--             canEnable = function ()
+--                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
+--             end
+--         },
+--         {
+--             id = "rhd_test:radial_action_7",
+--             icon = "user-group",
+--             label = "TEST ACTION 7",
+--             action = function ()
+--                 print("AWDWAD 7")
+--             end,
+--             canEnable = function ()
+--                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
+--             end
+--         },
+--         {
+--             id = "rhd_test:radial_action_8",
+--             icon = "user-group",
+--             label = "TEST ACTION 8",
+--             action = function ()
+--                 print("AWDWAD 8")
 --             end,
 --             canEnable = function ()
 --                 return GetSelectedPedWeapon(PlayerPedId()) == joaat("WEAPON_PISTOL")
@@ -31,6 +108,150 @@
 --                     icon = "user-group",
 --                     label = "Test 2",
 --                     options = {
+--                         {
+--                             id = "rhd_test:radial_items_1",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 1",
+--                             action = function ()
+--                                 print("test 1")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_2",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 2",
+--                             action = function ()
+--                                 print("test 2")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_3",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 3",
+--                             action = function ()
+--                                 print("test 3")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_4",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 4",
+--                             action = function ()
+--                                 print("test 4")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_5",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 5",
+--                             action = function ()
+--                                 print("test 5")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_6",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 6",
+--                             action = function ()
+--                                 print("test 6")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_7",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 7",
+--                             action = function ()
+--                                 print("test 7")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_8",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 8",
+--                             action = function ()
+--                                 print("test 8")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_9",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 9",
+--                             action = function ()
+--                                 print("test 9")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_10",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 10",
+--                             action = function ()
+--                                 print("test 10")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_11",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 11",
+--                             action = function ()
+--                                 print("test 11")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_12",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 12",
+--                             action = function ()
+--                                 print("test 12")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_13",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 13",
+--                             action = function ()
+--                                 print("test 13")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_14",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 14",
+--                             action = function ()
+--                                 print("test 14")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_15",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 15",
+--                             action = function ()
+--                                 print("test 15")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_16",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 16",
+--                             action = function ()
+--                                 print("test 16")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_17",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 17",
+--                             action = function ()
+--                                 print("test 17")
+--                             end
+--                         },
+--                         {
+--                             id = "rhd_test:radial_items_18",
+--                             icon = "user-group",
+--                             label = "TEST ITEMS 18",
+--                             action = function ()
+--                                 print("test 18")
+--                             end
+--                         },
 --                         {
 --                             id = "rhd_test:radial_options_3",
 --                             icon = "user-group",
