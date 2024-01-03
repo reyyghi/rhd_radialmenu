@@ -67,17 +67,28 @@ function ReadTable(data)
                 label = item.label,
                 icon = item.icon,
                 KeepOpen = item.KeepOpen,
-                action = item.action,
-                event = item.event,
-                serverEvent = item.serverEvent,
-                command = item.command,
-                export = item.export,
             }
+
+            RHDITEMS[item.id] = {}
+
+            if item.action then
+                RHDITEMS[item.id].action = item.action
+            elseif item.event then
+                RHDITEMS[item.id].event = item.event
+            elseif item.serverEvent then
+                RHDITEMS[item.id].serverEvent = item.serverEvent
+            elseif item.command then
+                RHDITEMS[item.id].command = item.command
+            elseif item.export then
+                RHDITEMS[item.id].export = item.export
+            end
+            
+            if item.args then
+                RHDITEMS[item.id].args = item.args
+            end
 
             if item.options then
                 newItem.options = ReadTable(item.options)
-            else
-                RHDITEMS[item.id] = newItem
             end
 
             PM[#PM + 1] = newItem
