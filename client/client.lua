@@ -35,6 +35,7 @@ local function removeRadialItem ( radialId )
     for k, v in pairs(Config.ItemRadial) do
         if v.id == radialId then
             table.remove(Config.ItemRadial, k)
+            T.items_func[v.id] = nil
         end
     end
 end
@@ -42,12 +43,11 @@ end
 --- function to open radail menu
 local function radialAction ()
     local Data = T.func.Filter(Config.ItemRadial)
-    if Data and next(Data) then T.items_func = {}
-        local enableMenu = T.func.Read(Data)
+    if Data and next(Data) then
         if not MenuReady then
             SendNUIMessage({
                 state = "show",
-                data = enableMenu,
+                data = T.func.Read(Data),
                 holdkey = Config.OpenRadial.hold or false
             })
             SetCursorLocation(0.5, 0.5)
@@ -175,6 +175,7 @@ RegisterCommand("oprenradial", function ()
     if radialDisable then return
         
     end
+    T.items_func = {}
     radialAction()
 end, false)
 
