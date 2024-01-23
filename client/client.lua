@@ -1,19 +1,28 @@
 --[[ Local Variable ]]
-local RHDITEMS = {}
 local radialDisable = false
 local MenuReady = false
 
+local T = {
+    func = {},
+    items_func = {}
+}
+
 --[[ Local Functions ]]
+---@param resource string resources name
+---@param export string export name
+---@return fun(name: string, method: function)
 local function useExport(resource, export)
 	return exports[resource][export]()
 end
 
+---@param radialData table
 local function addRadialItem ( radialData )
     if not radialData.id then return end
     radialData.resources = GetInvokingResource()
     Config.ItemRadial[#Config.ItemRadial+1] = radialData
 end
 
+---@param radialId string id of radial
 local function removeRadialItem ( radialId )
     if not radialId then
         return
@@ -30,11 +39,11 @@ local function removeRadialItem ( radialId )
     end
 end
 
+--- function to open radail menu
 local function radialAction ()
-    local enableMenu = {} RHDITEMS = {}
-    local Data = Config.ItemRadial
-    if Data and next(Data) then
-        enableMenu = ReadTable(Data)
+    local Data = T.func.Filter(Config.ItemRadial)
+    if Data and next(Data) then T.items_func = {}
+        local enableMenu = T.func.Read(Data)
         if not MenuReady then
             SendNUIMessage({
                 state = "show",
@@ -50,67 +59,83 @@ local function radialAction ()
     end
 end
 
-function ReadTable(data)
+---@param RadialTable table
+---@return table
+function T.func.Filter (RadialTable)
+    local Result = {}
+    for index, items in ipairs(RadialTable) do
+        local canAdd = true
+        if items.canEnable then
+            canAdd = items.canEnable()
+        end
+        if canAdd then
+            local newItem = {
+                id = items.id,
+                label = items.label,
+                icon = items.icon,
+                KeepOpen = items.KeepOpen,
+            }
+
+            T.items_func[items.id] = {}
+
+            if items.action then
+                T.items_func[items.id].action = items.action
+            elseif items.event then
+                T.items_func[items.id].event = items.event
+            elseif items.serverEvent then
+                T.items_func[items.id].serverEvent = items.serverEvent
+            elseif items.command then
+                T.items_func[items.id].command = items.command
+            elseif items.export then
+                T.items_func[items.id].export = items.export
+            end
+            
+            if items.args then
+                T.items_func[items.id].args = items.args
+            end
+
+            if items.options then
+                newItem.options = T.func.Filter(items.options)
+            end
+
+            Result[#Result+1] = newItem
+        end
+    end
+
+    return Result
+end
+
+---@param RadialTable table
+---@return table
+function T.func.Read(RadialTable)
     local Result = {}
     local PM = Result
 
-    for index, item in ipairs(data) do
-        local canAdd = true
-
-        if item.canEnable then
-            canAdd = item.canEnable()
+    for index, items in ipairs(RadialTable) do
+        
+        if items.options then
+            items.options = T.func.Read(items.options)
         end
 
-        if canAdd then
-            local newItem = {
-                id = item.id,
-                label = item.label,
-                icon = item.icon,
-                KeepOpen = item.KeepOpen,
-            }
+        PM[#PM + 1] = items
 
-            RHDITEMS[item.id] = {}
-
-            if item.action then
-                RHDITEMS[item.id].action = item.action
-            elseif item.event then
-                RHDITEMS[item.id].event = item.event
-            elseif item.serverEvent then
-                RHDITEMS[item.id].serverEvent = item.serverEvent
-            elseif item.command then
-                RHDITEMS[item.id].command = item.command
-            elseif item.export then
-                RHDITEMS[item.id].export = item.export
-            end
-            
-            if item.args then
-                RHDITEMS[item.id].args = item.args
-            end
-
-            if item.options then
-                newItem.options = ReadTable(item.options)
-            end
-
-            PM[#PM + 1] = newItem
-
-            if Config.MaxItems.enable then
-                if index % Config.MaxItems.max == 0 and index < #data then
-                    local moreItem = {
-                        id = "_more",
-                        label = "More",
-                        icon = "ellipsis-h",
-                        options = {}
-                    }
-    
-                    PM[Config.MaxItems.max + 1] = moreItem
-                    PM = moreItem.options
-                end
+        if Config.MaxItems.enable then
+            if index % Config.MaxItems.max == 0 and index < #RadialTable then
+                local moreItem = {
+                    id = "_more",
+                    label = "More",
+                    icon = "ellipsis-h",
+                    options = {}
+                }
+                PM[Config.MaxItems.max + 1] = moreItem
+                PM = moreItem.options
             end
         end
     end
 
     return Result
 end
+
 
 --[[ NUI Callback ]]
 RegisterNUICallback('closemenu', function(data, cb)
@@ -128,7 +153,7 @@ RegisterNUICallback('closemenu', function(data, cb)
 end)
 
 RegisterNUICallback("recieveData", function ( data, cb )
-    local Type = RHDITEMS[data.id]
+    local Type = T.items_func[data.id]
     if Type then
         if Type.action then
             Type.action()
